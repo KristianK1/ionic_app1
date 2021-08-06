@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -6,18 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+  
   username: string = "";
   pass: string = "";
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private userService: UserService) {
 
   }
 
+  ngOnInit() {
+    console.log("Login page: ", this.userService.logiran);
+  }
+
   clicked() {
-    console.log("username: ", this.username, " password: ", this.pass);
+    this.userService.login(this.username, this.pass);
     this.username = "";
     this.pass = "";
   }
